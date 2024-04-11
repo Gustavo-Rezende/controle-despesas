@@ -14,6 +14,11 @@ class DespesaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'id_cartao' => $this->id_cartao,
+            'valor' => $this->valor,
+            'categoria' => $this->categoria,
+        ];
     }
 }
