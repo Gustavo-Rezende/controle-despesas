@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cartao', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id')->on('usuario')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->decimal('saldo', 10, 2);
             $table->string('numero_cartao')->unique();
         });
