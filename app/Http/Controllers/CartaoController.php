@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CartaoResource;
 use Illuminate\Http\Request;
 use App\Services\CartaoService;
+use App\Http\Resources\CartaoResource;
 
 class CartaoController extends Controller
 {

@@ -10,9 +10,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function () {
-
     Route::apiResource('/usuarios', UsusarioController::class);
-    Route::apiResource('/despesas', DespesaController::class);
     Route::apiResource('/cartoes', CartaoController::class);
-
+    Route::apiResource('/despesas', DespesaController::class);
 });
