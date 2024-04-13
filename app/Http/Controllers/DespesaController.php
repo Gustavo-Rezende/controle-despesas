@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\DespesaResource;
-use App\Models\Despesa;
-use App\Repositories\DespesaRepository;
 use Illuminate\Http\Request;
+use App\Services\DespesaService;
+use App\Http\Resources\DespesaResource;
 
 class DespesaController extends Controller
 {
-    protected $despesaRepository;
+    protected $despesaService;
 
-    public function __construct(DespesaRepository $despesaRepository)
+    public function __construct(DespesaService $despesaService)
     {
-        $this->despesaRepository = $despesaRepository;
+        $this->despesaService = $despesaService;
     }
 
     /**
@@ -21,8 +20,8 @@ class DespesaController extends Controller
      */
     public function index()
     {
-        $despesas = $this->despesaRepository->getAll();
-        return DespesaResource::collection($despesas);
+        $despesas = $this->despesaService->getAll();
+        return response()->json($despesas);
     }
 
     /**
@@ -32,7 +31,7 @@ class DespesaController extends Controller
     {
         $this->validacao($request);
 
-        $despesa = $this->despesaRepository->create($request->all());
+        $despesa = $this->despesaService->create($request->all());
 
         return response()->json(new DespesaResource($despesa), 201);
     }
@@ -42,8 +41,8 @@ class DespesaController extends Controller
      */
     public function show(string $id)
     {
-        $despesa = $this->despesaRepository->getById($id);
-        return new DespesaResource($despesa);
+        $despesa = $this->despesaService->getById($id);
+        return response()->json($despesa);
     }
 
     /**
@@ -53,7 +52,7 @@ class DespesaController extends Controller
     {
         $this->validacao($request);
 
-        $despesa = $this->despesaRepository->update($request->all(), $id);
+        $despesa = $this->despesaService->update($request->all(), $id);
 
         return response()->json(new DespesaResource($despesa), 200);
     }
@@ -63,8 +62,7 @@ class DespesaController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->despesaRepository->delete($id);
-
+        $this->despesaService->delete($id);
         return response()->json(null, 204);
     }
 

@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\UsuarioResource;
-use App\Repositories\UsuarioRepository;
+use App\Services\UsuarioService;
 
 class UsusarioController extends Controller
 {
-    protected $usuarioRepository;
+    protected $usuarioService;
 
-    public function __construct(UsuarioRepository $usuarioRepository)
+    public function __construct(UsuarioService $usuarioService)
     {
-        $this->usuarioRepository = $usuarioRepository;
+        $this->usuarioService = $usuarioService;
     }
 
     /**
@@ -20,8 +20,8 @@ class UsusarioController extends Controller
      */
     public function index()
     {
-        $usuarios = $this->usuarioRepository->getAll();
-        return UsuarioResource::collection($usuarios);
+        $usuarios = $this->usuarioService->getAll();
+        return response()->json($usuarios);
     }
 
     /**
@@ -31,9 +31,9 @@ class UsusarioController extends Controller
     {
         $this->validacao($request);
 
-        $usuario = $this->usuarioRepository->create($request->all());
+        $usuario = $this->usuarioService->create($request->all());
 
-        return response()->json(new UsuarioResource($usuario), 201);
+        return response()->json($usuario, 201);
     }
 
     /**
@@ -41,8 +41,8 @@ class UsusarioController extends Controller
      */
     public function show(string $id)
     {
-        $usuario = $this->usuarioRepository->getById($id);
-        return new UsuarioResource($usuario);
+        $usuario = $this->usuarioService->getById($id);
+        return response()->json($usuario);
     }
 
     /**
@@ -52,9 +52,9 @@ class UsusarioController extends Controller
     {
         $this->validacao($request);
 
-        $usuario = $this->usuarioRepository->update($request->all(), $id);
+        $usuario = $this->usuarioService->update($request->all(), $id);
 
-        return response()->json(new UsuarioResource($usuario), 200);
+        return response()->json($usuario, 200);
     }
 
     /**
@@ -62,7 +62,7 @@ class UsusarioController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->usuarioRepository->delete($id);
+        $this->usuarioService->delete($id);
 
         return response()->json(null, 204);
     }

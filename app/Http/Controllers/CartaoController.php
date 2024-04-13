@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CartaoResource;
 use Illuminate\Http\Request;
-use App\Repositories\CartaoRepository;
+use App\Services\CartaoService;
 
 class CartaoController extends Controller
 {
-    protected $cartaoRepository;
+    protected $cartaoService;
 
-    public function __construct(CartaoRepository $cartaoRepository)
+    public function __construct(CartaoService $cartaoService)
     {
-        $this->cartaoRepository = $cartaoRepository;
+        $this->cartaoService = $cartaoService;
     }
 
     /**
@@ -20,8 +20,8 @@ class CartaoController extends Controller
      */
     public function index()
     {
-        $cartoes = $this->cartaoRepository->getAll();
-        return CartaoResource::collection($cartoes);
+        $cartoes = $this->cartaoService->getAll();
+        return response()->json($cartoes);
     }
 
     /**
@@ -31,7 +31,7 @@ class CartaoController extends Controller
     {
         $this->validacao($request);
 
-        $cartao = $this->cartaoRepository->create($request->all());
+        $cartao = $this->cartaoService->create($request->all());
 
         return response()->json(new CartaoResource($cartao), 201);
     }
@@ -41,7 +41,7 @@ class CartaoController extends Controller
      */
     public function show(string $id)
     {
-        $cartao = $this->cartaoRepository->getById($id);
+        $cartao = $this->cartaoService->getById($id);
         return new CartaoResource($cartao);
     }
 
@@ -52,7 +52,7 @@ class CartaoController extends Controller
     {
         $this->validacao($request);
 
-        $cartao = $this->cartaoRepository->update($request->all(), $id);
+        $cartao = $this->cartaoService->update($request->all(), $id);
 
         return response()->json(new CartaoResource($cartao), 200);
     }
@@ -62,7 +62,7 @@ class CartaoController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->cartaoRepository->delete($id);
+        $this->cartaoService->delete($id);
 
         return response()->json(null, 204);
     }
