@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cartao extends Model
 {
     use HasFactory;
+
+    protected $table = 'cartao';
+    public $timestamps = false;
 }

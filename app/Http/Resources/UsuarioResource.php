@@ -16,9 +16,12 @@ class UsuarioResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nome' => $this->nome,
+            'nome' => $this->name,
             'email' => $this->email,
+            'emailVerificado' => $this->email_verified_at,
+            'senha' => $this->password,
             'tipo' => $this->tipo,
+            'token' => $this->remember_token,
         ];
     }
 }

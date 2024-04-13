@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Models\Usuario;
+use App\Models\User;
 
 class UsuarioRepository
 {
     protected $usuario;
 
-    public function __construct(Usuario $usuario)
+    public function __construct(User $usuario)
     {
         $this->usuario = $usuario;
     }
