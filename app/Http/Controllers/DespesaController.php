@@ -20,7 +20,7 @@ class DespesaController extends Controller
      */
     public function index()
     {
-        $despesas = $this->despesaService->getAll();
+        $despesas = $this->despesaService->listarDespesasAutorizadas();
         return response()->json($despesas);
     }
 

@@ -20,7 +20,7 @@ class CartaoController extends Controller
      */
     public function index()
     {
-        $cartoes = $this->cartaoService->getAll();
+        $cartoes = $this->cartaoService->listarCartoesAutorizados();
         return response()->json($cartoes);
     }
 

@@ -41,4 +41,12 @@ class DespesaRepository
     {
         return $this->despesa->all();
     }
+
+    public function getDespesaByUser($id) {
+        return $this->despesa->select('despesa.*')
+                       ->join('cartao', 'despesa.id_cartao', '=', 'cartao.id')
+                       ->join('users', 'cartao.id_user', '=', 'users.id')
+                       ->where('users.id', $id)
+                       ->get();
+    }
 }

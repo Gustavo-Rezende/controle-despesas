@@ -13,6 +13,17 @@ class CartaoService
         $this->cartaoRepository = $cartaoRepository;
     }
 
+    public function listarCartoesAutorizados()
+    {
+        $usuario = auth()->user();
+
+        if ($usuario->tipo === 'administrador') {
+            return $this->cartaoRepository->getAll();
+        }
+
+        return $this->cartaoRepository->getCartaoByUser($usuario->id);
+    }
+
     public function getAll()
     {
         return $this->cartaoRepository->getAll();

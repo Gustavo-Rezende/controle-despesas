@@ -41,4 +41,11 @@ class CartaoRepository
     {
         return $this->cartao->all();
     }
+
+    public function getCartaoByUser($id) {
+        return $this->cartao->select('cartao.*')
+                       ->join('users', 'cartao.id_user', '=', 'users.id')
+                       ->where('users.id', $id)
+                       ->get();
+    }
 }

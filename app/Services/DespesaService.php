@@ -13,6 +13,17 @@ class DespesaService
         $this->despesaRepository = $despesaRepository;
     }
 
+    public function listarDespesasAutorizadas()
+    {
+        $usuario = auth()->user();
+
+        if ($usuario->tipo === 'administrador') {
+            return $this->despesaRepository->getAll();
+        }
+
+        return $this->despesaRepository->getDespesaByUser($usuario->id);
+    }
+
     public function getAll()
     {
         return $this->despesaRepository->getAll();

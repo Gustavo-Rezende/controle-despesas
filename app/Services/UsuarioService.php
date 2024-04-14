@@ -13,6 +13,17 @@ class UsuarioService
         $this->usuarioRepository = $usuarioRepository;
     }
 
+    public function listarUsuariosAutorizados()
+    {
+        $usuario = auth()->user();
+
+        if ($usuario->tipo === 'administrador') {
+            return $this->usuarioRepository->getAll();
+        }
+
+        return $this->usuarioRepository->getById($usuario->id);
+    }
+
     public function getAll()
     {
         return $this->usuarioRepository->getAll();

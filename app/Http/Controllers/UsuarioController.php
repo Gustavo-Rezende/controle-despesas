@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\UsuarioResource;
 use App\Services\UsuarioService;
 
-class UsusarioController extends Controller
+class UsuarioController extends Controller
 {
     protected $usuarioService;
 
@@ -20,7 +19,7 @@ class UsusarioController extends Controller
      */
     public function index()
     {
-        $usuarios = $this->usuarioService->getAll();
+        $usuarios = $this->usuarioService->listarUsuariosAutorizados();
         return response()->json($usuarios);
     }
 
