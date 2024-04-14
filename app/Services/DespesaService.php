@@ -2,15 +2,19 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\DB;
+use App\Repositories\CartaoRepository;
 use App\Repositories\DespesaRepository;
 
 class DespesaService
 {
     protected $despesaRepository;
+    protected $cartaoRepository;
 
-    public function __construct(DespesaRepository $despesaRepository)
+    public function __construct(DespesaRepository $despesaRepository, CartaoRepository $cartaoRepository)
     {
         $this->despesaRepository = $despesaRepository;
+        $this->cartaoRepository = $cartaoRepository;
     }
 
     public function listarDespesasAutorizadas()
@@ -36,7 +40,27 @@ class DespesaService
 
     public function create(array $data)
     {
-        return $this->despesaRepository->create($data);
+        $cartao = $this->cartaoRepository->getById($data['id_cartao']);
+
+        if ($cartao->saldo < $data['valor']) {
+            throw new \Exception('Saldo insuficiente');
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $cartao->saldo -= $data['valor'];
+            $this->cartaoRepository->update(['saldo' => $cartao->saldo], $cartao->id);
+
+            $despesa = $this->despesaRepository->create($data);
+
+            DB::commit();
+
+            return $despesa;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw new \Exception($e, 'Erro ao criar a despesa');
+        }
     }
 
     public function update(array $data, $id)

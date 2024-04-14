@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UsuarioService;
+use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
@@ -28,7 +29,9 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validacao($request);
+        if($validacao = $this->validacao($request)){
+            return $validacao->getContent();
+        }
 
         $usuario = $this->usuarioService->create($request->all());
 
@@ -49,7 +52,9 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $this->validacao($request);
+        if($validacao = $this->validacao($request)){
+            return $validacao->getContent();
+        }
 
         $usuario = $this->usuarioService->update($request->all(), $id);
 
@@ -71,7 +76,7 @@ class UsuarioController extends Controller
      */
     private function validacao($request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nome' => 'required|string',
             'email' => 'required|email|unique:usuario,email,',
             'tipo' => 'required|string',
@@ -84,5 +89,9 @@ class UsuarioController extends Controller
             'tipo.required' => 'O campo de tipo é obrigatório.',
             'tipo.string' => 'O campo tipo deve ser uma string.',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
     }
 }

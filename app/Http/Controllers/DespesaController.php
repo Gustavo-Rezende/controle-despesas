@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\DespesaService;
 use App\Http\Resources\DespesaResource;
+use Illuminate\Support\Facades\Validator;
 
 class DespesaController extends Controller
 {
@@ -29,11 +30,16 @@ class DespesaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validacao($request);
+        if($validacao = $this->validacao($request)){
+            return $validacao->getContent();
+        }
 
-        $despesa = $this->despesaService->create($request->all());
-
-        return response()->json(new DespesaResource($despesa), 201);
+        try {
+            $despesa = $this->despesaService->create($request->all());
+            return response()->json(new DespesaResource($despesa), 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -71,8 +77,8 @@ class DespesaController extends Controller
      */
     private function validacao($request)
     {
-        $request->validate([
-            'id_cartao' => 'required|integer|unique:cartao',
+        $validator = Validator::make($request->all(), [
+            'id_cartao' => 'required|integer',
             'valor' => 'required|numeric|min:0',
             'categoria' => 'required|string',
         ], [
@@ -80,9 +86,14 @@ class DespesaController extends Controller
             'id_cartao.integer' => 'O campo cartão deve ser um número inteiro.',
             'valor.required' => 'O campo valor é obrigatório.',
             'valor.numeric' => 'O campo valor deve ser numérico.',
-            'valor.min:0' => 'O campo valor não pode ser negativo',
+            'valor.min' => 'O campo valor não pode ser negativo',
             'categoria.required' => 'O campo de categoria é obrigatório.',
             'categoria.string' => 'O campo categoria deve ser uma string.',
         ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
     }
 }

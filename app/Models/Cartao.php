@@ -11,4 +11,8 @@ class Cartao extends Model
 
     protected $table = 'cartao';
     public $timestamps = false;
+
+    protected $fillable = [
+        'saldo'
+    ];
 }
