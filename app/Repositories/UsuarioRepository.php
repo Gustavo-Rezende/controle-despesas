@@ -41,4 +41,9 @@ class UsuarioRepository
     {
         return $this->usuario->all();
     }
+
+    public function buscarAdministradores()
+    {
+        return User::where('tipo', 'administrador')->get();
+    }
 }

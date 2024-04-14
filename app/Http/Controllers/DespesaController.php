@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\EmailService;
 use App\Services\DespesaService;
 use App\Http\Resources\DespesaResource;
 use Illuminate\Support\Facades\Validator;
@@ -10,10 +11,12 @@ use Illuminate\Support\Facades\Validator;
 class DespesaController extends Controller
 {
     protected $despesaService;
+    protected $emailService;
 
-    public function __construct(DespesaService $despesaService)
+    public function __construct(DespesaService $despesaService, EmailService $emailService)
     {
         $this->despesaService = $despesaService;
+        $this->emailService = $emailService;
     }
 
     /**
@@ -36,6 +39,7 @@ class DespesaController extends Controller
 
         try {
             $despesa = $this->despesaService->create($request->all());
+            $this->emailService->enviarDespesaCriadaParaAdministradores($despesa);
             return response()->json(new DespesaResource($despesa), 201);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

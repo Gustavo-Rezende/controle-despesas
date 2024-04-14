@@ -4,11 +4,10 @@ namespace App\Providers;
 
 use App\Models\Cartao;
 use App\Models\Despesa;
-use App\Models\Usuario;
+use App\Services\EmailService;
 use App\Repositories\CartaoRepository;
 use App\Repositories\DespesaRepository;
 use App\Repositories\UsuarioRepository;
-use App\http\Services\CartaoService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(DespesaRepository::class, function ($app) {
             return new DespesaRepository(new Despesa());
+        });
+
+        $this->app->singleton(EmailService::class, function ($app) {
+            return new EmailService($app->make(UsuarioRepository::class));
         });
     }
 
