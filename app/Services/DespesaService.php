@@ -59,7 +59,7 @@ class DespesaService
             return $despesa;
         } catch (\Exception $e) {
             DB::rollBack();
-            throw new \Exception($e, 'Erro ao criar a despesa');
+            throw new \Exception('Erro ao criar a despesa '.$e->getMessage());
         }
     }
 

@@ -13,6 +13,9 @@ class Cartao extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'saldo'
+        'id',
+        'id_user',
+        'saldo',
+        'numero_cartao'
     ];
 }

@@ -12,6 +12,7 @@ class Despesa extends Model
     protected $table = 'despesa';
 
     protected $fillable = [
+        'id',
         'id_cartao',
         'valor',
         'categoria'
