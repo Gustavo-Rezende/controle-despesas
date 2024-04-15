@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "8efef776-e4c1-40a8-8865-7aaa11e978a3",
+		"name": "API_Despesas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33747152"
+	},
+	"item": [
+		{
+			"name": "cartoes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/api/cartoes/26",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"cartoes",
+						"26"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "despesas",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/api/despesas",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"despesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/api/usuarios",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"rickey66@example.com\",\n    \"password\":\"password\",\n    \"nome\":\"tokenAPIComum\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/login",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "despesas",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_cartao\": 26,\n    \"valor\": \"20.00\",\n    \"categoria\": \"alimentacao\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/despesas",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"despesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\" : \"Joelson\",\n    \"email\" : \"joelson@hotmail.com\",\n    \"tipo\" : \"comum\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/usuarios",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cartoes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_usuario\" : 23,\n    \"saldo\" : \"560.00\",\n    \"numero_cartao\" : \"12345678910\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/cartoes",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"cartoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "despesas",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_cartao\": 26,\n    \"valor\": \"20.00\",\n    \"categoria\": \"alimentacao\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/despesas/6",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"despesas",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\" : \"Romulo\",\n    \"tipo\" : \"administrador\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/usuarios/62",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"usuarios",
+						"62"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cartoes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_usuario\" : 15,\n    \"saldo\" : \"280.00\",\n    \"numero_cartao\" : \"98765432102\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/cartoes/26",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"cartoes",
+						"26"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "despesas",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/api/despesas/2",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"despesas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/api/usuarios/11",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"usuarios",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cartoes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{APIKey}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/api/cartoes/5",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"cartoes",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APIKey",
+			"value": "1|LHICscckYc8dAngID9HmPMN6MJNxiNB0PWueIiGHcd303b70",
+			"type": "string"
+		},
+		{
+			"key": "BaseURL",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "APIKey",
+			"value": "2|SJ61bNqDR97zQnkEBbJatNyonVuAA5I6O78qkU9p8c6e34a8",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
